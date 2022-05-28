@@ -13,7 +13,7 @@
       <!-- 递归菜单组件 -->
       <menu-item :menus="menu.children"></menu-item>
     </el-sub-menu>
-    <el-menu-item v-else index="2" >
+    <el-menu-item v-else @click="toPath(menu.name)" :index="menu.path">
       <el-icon>
         <component :is="menu.meta.icon" />
       </el-icon>
@@ -23,6 +23,13 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 defineProps(['menus'])
+
+const toPath = (name) => {
+  router.push({ name })
+}
 </script>
 <style lang="scss" scoped></style>

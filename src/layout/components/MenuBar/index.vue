@@ -63,9 +63,9 @@ const menus = reactive([
     ],
   },
   {
-    path: '/store',
+    path: '/stores',
     redirect: '/store',
-    name: 'Store',
+    name: 'storesLocation',
     meta: {
       title: '门店管理',
       icon: 'LocationInformation',

@@ -17,7 +17,7 @@
             </el-icon>
           </el-row>
         </el-header>
-        <el-main>Main</el-main>
+        <el-main><app-main></app-main></el-main>
       </el-container>
     </el-container>
   </div>
@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import LogoBar from './components/LogoBar/index.vue'
+import AppMain from './components/AppMain/AppMain.vue'
 import MenuBar from './components/MenuBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { computed, ref } from 'vue'
