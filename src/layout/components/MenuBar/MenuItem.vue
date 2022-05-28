@@ -13,7 +13,7 @@
       <!-- 递归菜单组件 -->
       <menu-item :menus="menu.children"></menu-item>
     </el-sub-menu>
-    <el-menu-item v-else index="2">
+    <el-menu-item v-else index="2" >
       <el-icon>
         <component :is="menu.meta.icon" />
       </el-icon>
