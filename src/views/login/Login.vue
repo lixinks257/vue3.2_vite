@@ -1,92 +1,3 @@
-<script setup lang="ts">
-import { User, Lock} from '@element-plus/icons-vue'
-import {getCode} from '../../api/Auth'
-import { ref, reactive,onMounted } from 'vue'
-import { useRouter } from "vue-router";
-
-
-
-
-const router = useRouter()
-
-
-const loginFormRef = ref(null)
-
-const loginForm = reactive({
-  username: '',
-  password: '',
-  verifyCode:''
-})
-
-const codeUrl = ref<string>()
-
-const loginRules = reactive({
-  username: [
-    {
-      required: true,
-      message: '请输入username',
-      trigger: 'blur',
-    },
-    { pattern: /^[a-zA_Z0-9]{2,10}$/, message: '请输入2到10位数字或字母', trigger: 'blur' },
-    {
-      min: 3,
-      max: 15,
-      message: 'Length should be 3 to 15',
-      trigger: 'blur',
-    },
-  ],
-
-  password: [
-    {
-      required: true,
-      message: '请输入password',
-      trigger: 'blur',
-    },
-    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
-    {
-      min: 3,
-      max: 10,
-      message: 'Length should be 3 to 10',
-      trigger: 'blur',
-    },
-  ],
-
-  verifyCode: [
-      {
-      required: true,
-      message: '请输入验证码',
-      trigger: 'blur',
-    },
-    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
-  
-  ]
-})
-// 获取验证码
-const getValidCode = () =>{
-
-  getCode().then(result =>{
-      
-    
-      codeUrl.value = result.data.image
-
-     
-  })
-}
-
-// 初始化
-onMounted(() => {
-  getValidCode()
-})
-
-// 登录事件
-const handleLogin = () => {
-  router.push('/')
-}
-
-
-
-</script>
-
 <template>
   <div class="login-container">
     <!-- 背景vedio -->
@@ -106,35 +17,146 @@ const handleLogin = () => {
           <el-icon>
             <user />
           </el-icon>
-          <el-input placeholder="username" v-model="loginForm.username" type="text" />
+          <el-input
+            placeholder="username"
+            v-model="loginForm.username"
+            type="text"
+          />
         </el-form-item>
         <el-form-item prop="password">
-          <el-icon >
+          <el-icon>
             <lock />
           </el-icon>
-          <el-input placeholder="password" v-model="loginForm.password" type="password" />
+          <el-input
+            placeholder="password"
+            v-model="loginForm.password"
+            type="password"
+          />
         </el-form-item>
-        <el-form-item  prop="verifyCode" class="verify-item">
-          
+        <el-form-item prop="verifyCode" class="verify-item">
           <el-input
             v-model="loginForm.verifyCode"
             placeholder="验证码"
             type="verifyCode"
-            style="margin-left: 10px; width: 40%; height:40px; display:inline-block; border: 1px solid rgba(255, 255, 255, 0.1);"
+            style="
+              margin-left: 10px;
+              width: 40%;
+              height: 40px;
+              display: inline-block;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+            "
           ></el-input>
-          <div style="margin-left: 10px;  display:inline-block; height:40px">
-            <img :src="codeUrl" @click="getValidCode" alt=" " 
-              style="width: 100%;height:100%;object-fit: cover; margin-bottom: -12px;"
-             />
+          <div style="margin-left: 10px; display: inline-block; height: 40px;">
+            <img
+              :src="codeUrl"
+              @click="getValidCode"
+              alt=" "
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                margin-bottom: -12px;
+              "
+            />
           </div>
         </el-form-item>
-        <el-form-item style="border: none; background:none">
-          <el-button type="primary" style="width:100%;  margin-bottom:30px;" @click="handleLogin">登录</el-button>
+        <el-form-item style="border: none; background: none;">
+          <el-button
+            type="primary"
+            style="width: 100%; margin-bottom: 30px;"
+            @click="handleLogin"
+          >
+            登录
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { User, Lock } from '@element-plus/icons-vue'
+import { getCode } from '../../api/Auth'
+import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const loginFormRef = ref(null)
+
+const loginForm = reactive({
+  username: '',
+  password: '',
+  verifyCode: '',
+})
+
+const codeUrl = ref<string>()
+
+const loginRules = reactive({
+  username: [
+    {
+      /*  required,必填 */
+      required: true,
+      message: '请输入username',
+      trigger: 'blur',
+    },
+    {
+      /*  正则校验,可以写自己需要的各种正则表达式 */
+      pattern: /^[a-zA_Z0-9]{2,10}$/,
+      message: '请输入2到10位数字或字母',
+      trigger: 'blur',
+    },
+    {
+      min: 3,
+      max: 15,
+      message: 'Length should be 3 to 15',
+      trigger: 'blur',
+    },
+  ],
+  /* {max:2,min:10, message:'请输入2到10位数字或字母', trigger: 'blur'}, { len: 10, message: '请输入10个字符', trigger: 'blur' } */
+  password: [
+    {
+      required: true,
+      message: '请输入password',
+      trigger: 'blur',
+    },
+    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
+    {
+      min: 3,
+      max: 10,
+      message: 'Length should be 3 to 10',
+      trigger: 'blur',
+    },
+  ],
+
+  verifyCode: [
+    {
+      required: true,
+      message: '请输入验证码',
+      trigger: 'blur',
+    },
+    /*  Whitespace不能全部都是空格 */
+    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
+  ],
+})
+
+// 获取验证码
+const getValidCode = () => {
+  getCode().then((result) => {
+    codeUrl.value = result.data.image
+  })
+}
+
+// 初始化
+onMounted(() => {
+  getValidCode()
+})
+
+// 登录事件
+const handleLogin = () => {
+  router.push('/')
+}
+</script>
 
 <style lang="scss">
 // 隐藏滚动条
@@ -169,11 +191,11 @@ const handleLogin = () => {
     height: 380px;
     padding: 4vh;
     margin: 20px;
-    background: url("@/assets/login/login_form.png");
+    background: url('@/assets/login/login_form.png');
     background-size: 100% 100%;
     border-radius: 10px;
     box-shadow: 0 2px 8px 0 rgba(7, 17, 27, 0.06);
-    opacity: "0.2";
+    opacity: '0.2';
 
     header {
       display: flex;
@@ -196,7 +218,6 @@ const handleLogin = () => {
       display: inline-block;
       height: 44px;
       width: 85%;
-       
 
       input {
         height: 44px;
@@ -228,7 +249,8 @@ const handleLogin = () => {
 
     .verify-item {
       padding-left: 0%;
-     border: none; background:none
+      border: none;
+      background: none;
     }
   }
 
