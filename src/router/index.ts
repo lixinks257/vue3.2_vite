@@ -189,4 +189,22 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,
 })
+// 路由前置首位
+router.beforeEach((to, from, next) => {
+  console.log('router', to, from)
+  /* router.getRoutes(): 获取路由列表 */
+  console.log('获取动态路由---', router.getRoutes())
+  /*  router.hasRoute('User'): 判断路由是否存在 */
+  console.log('获取动态路由---', router.hasRoute('User'))
+  /* removeRoute移除当前配置的单个路由 */
+  // router.removeRoute('User')
+  /* router.addRoute是vue-router4的改变之前添加的是数组,现在变成只能添加单条路由了 */
+  router.addRoute({
+    path: '/wong',
+    name: 'wong',
+    component: () => import('@/views/index/Index.vue'),
+  })
+  console.log(router.getRoutes())
+  next()
+})
 export default router
