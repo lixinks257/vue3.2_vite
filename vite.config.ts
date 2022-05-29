@@ -11,6 +11,15 @@ export default defineConfig({
   // 配置服务端口
   server: {
     port: 3001,
+    /* 配置代理 */
+    proxy: {
+      '/api': {
+        target: 'http://106.52.235.252:8101/',
+        changeOrigin: true, // 允许跨域
+        // 将作为识别用途的/api字符串从请求路径中去掉
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   resolve: {
     alias: {

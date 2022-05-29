@@ -9,11 +9,24 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    /* vue文件使用别名引入ts后缀文件, 会报错,找不到模块 需要在typescript.json中配置别名路径识别 */
     "paths": {
-      "@":["./src"],
-      "@/*":["./src/*"] //支持别名@
+      "@": [
+        "./src"
+      ],
+      "@/*": [
+        "./src/*"
+      ] //支持别名@
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
 }

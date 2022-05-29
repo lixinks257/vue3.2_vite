@@ -7,15 +7,23 @@
       </el-aside>
       <el-container>
         <el-header>
-          <el-row>
+          <el-row
+            :gutter="24"
+            style="width: 100%; display: flex; align-items: center;"
+          >
             <!-- 侧边栏展开折叠按钮 -->
-            <el-icon
-              style="font-size: 26px;"
-              @click="() => (collapsed = !collapsed)"
-            >
-              <component :is="collapsed ? Expand : Fold" />
-            </el-icon>
-            
+            <el-col :span="1">
+              <el-icon
+                style="font-size: 26px; margin-right: 15px;"
+                @click="() => (collapsed = !collapsed)"
+              >
+                <component :is="collapsed ? Expand : Fold" />
+              </el-icon>
+            </el-col>
+            <!-- header业务 -->
+            <el-col :span="23">
+              <header-bar />
+            </el-col>
           </el-row>
         </el-header>
         <el-main><app-main></app-main></el-main>
@@ -28,6 +36,7 @@
 import LogoBar from './components/LogoBar/index.vue'
 import AppMain from './components/AppMain/AppMain.vue'
 import MenuBar from './components/MenuBar/index.vue'
+import HeaderBar from './components/HeaderBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue'
 import { computed, ref } from 'vue'
 import { isMobile } from '../utils/isMobile'

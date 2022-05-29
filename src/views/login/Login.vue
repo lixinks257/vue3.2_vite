@@ -11,8 +11,7 @@
         <img src="@/assets/logo.png" />
         <h3>vue3-admin</h3>
       </header>
-      <!-- form组件 -->
-      <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules">
+      <el-form :model="loginForm" :rules="loginRules">
         <el-form-item prop="username">
           <el-icon>
             <user />
@@ -21,7 +20,7 @@
             placeholder="username"
             v-model="loginForm.username"
             type="text"
-          />
+          ></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-icon>
@@ -31,17 +30,15 @@
             placeholder="password"
             v-model="loginForm.password"
             type="password"
-          />
+          ></el-input>
         </el-form-item>
         <el-form-item prop="verifyCode" class="verify-item">
           <el-input
+            placeholder="verifyCode"
             v-model="loginForm.verifyCode"
-            placeholder="验证码"
-            type="verifyCode"
+            type="text"
             style="
-              margin-left: 10px;
               width: 40%;
-              height: 40px;
               display: inline-block;
               border: 1px solid rgba(255, 255, 255, 0.1);
             "
@@ -49,23 +46,18 @@
           <div style="margin-left: 10px; display: inline-block; height: 40px;">
             <img
               :src="codeUrl"
-              @click="getValidCode"
-              alt=" "
+              @click="getValidaCode"
               style="
+                margin-bottom: -12px;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                margin-bottom: -12px;
               "
             />
           </div>
         </el-form-item>
         <el-form-item style="border: none; background: none;">
-          <el-button
-            type="primary"
-            style="width: 100%; margin-bottom: 30px;"
-            @click="handleLogin"
-          >
+          <el-button type="primary" style="width: 100%;" @click="handleLogin">
             登录
           </el-button>
         </el-form-item>
@@ -75,86 +67,93 @@
 </template>
 
 <script setup lang="ts">
-import { User, Lock } from '@element-plus/icons-vue'
-import { getCode } from '../../api/Auth'
-import { ref, reactive, onMounted } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { getCode, login } from '@/api/Auth'
 import { useRouter } from 'vue-router'
+import { useStore } from '@/store'
 
+const store = useStore()
 const router = useRouter()
-
-const loginFormRef = ref(null)
-
+// 验证码
+const codeUrl = ref<string>()
+// form表单数据
 const loginForm = reactive({
   username: '',
   password: '',
+  uuid: '',
   verifyCode: '',
 })
 
-const codeUrl = ref<string>()
-
+// rules表单校验
 const loginRules = reactive({
   username: [
     {
-      /*  required,必填 */
       required: true,
-      message: '请输入username',
+      message: '不能为空,请输入username',
       trigger: 'blur',
     },
     {
-      /*  正则校验,可以写自己需要的各种正则表达式 */
       pattern: /^[a-zA_Z0-9]{2,10}$/,
-      message: '请输入2到10位数字或字母',
+      message: '请输入2到10的字母或者数字',
       trigger: 'blur',
     },
     {
       min: 3,
       max: 15,
-      message: 'Length should be 3 to 15',
+      message: '请输入3到15的字母或者数字',
       trigger: 'blur',
     },
   ],
-  /* {max:2,min:10, message:'请输入2到10位数字或字母', trigger: 'blur'}, { len: 10, message: '请输入10个字符', trigger: 'blur' } */
   password: [
     {
       required: true,
-      message: '请输入password',
+      message: '不能为空,请输入密码',
       trigger: 'blur',
     },
-    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
     {
       min: 3,
-      max: 10,
-      message: 'Length should be 3 to 10',
+      max: 15,
+      message: '请输入3到15的字母或者数字',
       trigger: 'blur',
     },
   ],
-
   verifyCode: [
     {
       required: true,
-      message: '请输入验证码',
+      message: '不能为空',
       trigger: 'blur',
     },
-    /*  Whitespace不能全部都是空格 */
-    { whitespace: true, message: '不能为全空格', trigger: 'blur' },
+    {
+      whitespace: true,
+      message: '不能为空格',
+    },
   ],
 })
 
 // 获取验证码
-const getValidCode = () => {
-  getCode().then((result) => {
-    codeUrl.value = result.data.image
+const getValidaCode = () => {
+  getCode().then((res) => {
+    codeUrl.value = res.data.image
+    /*  获取uuid */
+    loginForm.uuid = res.data.uuid
   })
 }
 
-// 初始化
 onMounted(() => {
-  getValidCode()
+  getValidaCode()
+  handleToken()
 })
+// token登录
+const handleToken = () => {
+  const token = localStorage.getItem('token')
+  if (token != null) {
+    store.dispatch('authStore/loginByToken', token)
+  }
+}
 
-// 登录事件
+// 登录
 const handleLogin = () => {
-  router.push('/')
+  store.dispatch('authStore/login', loginForm)
 }
 </script>
 
@@ -207,8 +206,8 @@ const handleLogin = () => {
         width: 40px;
       }
 
-      h1 {
-        margin-bottom: 0;
+      h3 {
+        // margin-bottom: 0;
         font-size: 24px;
         color: #fff;
         text-align: center;

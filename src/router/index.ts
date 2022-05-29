@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import { store } from '@/store'
+import { loginByToken } from '@/api/Auth'
 // RouteRecordRaw:泛型的写法,约束类型
 const routes: Array<RouteRecordRaw> = [
   {
@@ -184,15 +186,15 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
 ]
+
 const router = createRouter({
-  // hash模式
   history: createWebHashHistory(),
   routes: routes,
 })
-// 路由前置首位
+
+// 前置守卫
 router.beforeEach((to, from, next) => {
-  console.log('router', to, from)
-  /* router.getRoutes(): 获取路由列表 */
+  const token = localStorage.getItem('token')
   console.log('获取动态路由---', router.getRoutes())
   /*  router.hasRoute('User'): 判断路由是否存在 */
   console.log('获取动态路由---', router.hasRoute('User'))
@@ -204,7 +206,24 @@ router.beforeEach((to, from, next) => {
     name: 'wong',
     component: () => import('@/views/index/Index.vue'),
   })
-  console.log(router.getRoutes())
-  next()
+  if (!store.state.authStore.token && !token) {
+    if (to.path.startsWith('/login')) next()
+    else {
+      next('/login')
+    }
+  } else if (!store.state.authStore.token && token) {
+    loginByToken(token).then((res) => {
+      if (res.data.status) {
+        store.commit('authStore/addUserInfo', res.data)
+
+        next()
+      } else {
+        next('/login')
+      }
+    })
+  } else {
+    next()
+  }
 })
+
 export default router
