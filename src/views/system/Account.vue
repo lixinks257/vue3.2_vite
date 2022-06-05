@@ -207,15 +207,18 @@ const resetForm = () => {
 
 // 删除用户
 const deleteUser = (id: number) => {
-  proxy?.$Confirm('确认要删除当前用户吗?').then(() => {
-    deleteSysUsers(id).then(() => {
-      proxy?.$Notify.success({
-        title: '删除成功',
-        duration: 500,
+  proxy
+    ?.$Confirm('确认要删除当前用户吗?')
+    .then(() => {
+      deleteSysUsers(id).then(() => {
+        proxy?.$Notify.success({
+          title: '删除成功',
+          duration: 500,
+        })
+        getUsers()
       })
-      getUsers()
     })
-  })
+    .catch(() => {})
 }
 
 // 修改用户按钮
@@ -251,6 +254,7 @@ const resetPw = (userId: number) => {
 // 设置角色按钮
 const toSetRole = (userId: number) => {
   getAllRoles().then((result) => {
+    console.log('result', result)
     roles.value = result.data
     state.currentUserId = userId
     state.showSetRoleDialog = true

@@ -156,7 +156,7 @@ const menus = reactive([
         name: 'account',
 
         meta: {
-          title: 'account',
+          title: '管理员管理',
           icon: 'User',
           roles: ['editor'],
         },
@@ -166,7 +166,7 @@ const menus = reactive([
         name: 'group',
 
         meta: {
-          title: 'group',
+          title: '角色管理',
           icon: 'Refrigerator',
           roles: ['admin'],
         },

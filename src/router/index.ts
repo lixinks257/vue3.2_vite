@@ -148,7 +148,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'account',
         component: () => import('@/views/system/Account.vue'),
         meta: {
-          title: 'account',
+          title: '管理员管理',
           icon: 'User',
           roles: ['editor'],
         },
@@ -158,7 +158,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'group',
         component: () => import('@/views/system/Group.vue'),
         meta: {
-          title: 'group',
+          title: '角色管理',
           icon: 'Refrigerator',
           roles: ['admin'],
         },
@@ -215,7 +215,6 @@ router.beforeEach((to, from, next) => {
     loginByToken(token).then((res) => {
       if (res.data.status) {
         store.commit('authStore/addUserInfo', res.data)
-
         next()
       } else {
         next('/login')
