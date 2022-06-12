@@ -1,14 +1,22 @@
 {
   "compilerOptions": {
+    /* 是把ts转成什么版本的js */
     "target": "esnext",
     "useDefineForClassFields": true,
+    /* 编译用的模块方式 */
     "module": "esnext",
     "moduleResolution": "node",
+    /* 严格模式总开关 */
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    /* 开启any类型检测 */
+    "noImplicitAny": true,
+    /* 检测是否为空,空指针 */
+    "strictNullChecks": true,
+    /* 选择宿主环境 */
     "lib": [
       "esnext",
       "dom"

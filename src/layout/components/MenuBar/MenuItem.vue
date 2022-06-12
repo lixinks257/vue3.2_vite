@@ -24,12 +24,10 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-const router = useRouter()
-
 defineProps(['menus'])
-
-const toPath = (name) => {
-  router.push({ name })
+const router = useRouter()
+const toPath = (item: string) => {
+  router.push({ name: item })
 }
 </script>
 <style lang="scss" scoped></style>
