@@ -2,6 +2,22 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 // import Layout from '@/layout/index.vue'
 import { store } from '@/store'
 import { loginByToken } from '@/api/Auth'
+/* 进度条 */
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+NProgress.configure({
+  // 动画方式
+  easing: 'ease',
+  // 递增进度条的速度
+  speed: 500,
+  // 是否显示加载ico
+  showSpinner: false,
+  // 自动递增间隔
+  trickleSpeed: 200,
+  // 初始化时的最小百分比
+  minimum: 0.3,
+}) //progress配置
 
 // 声明meta类型
 declare module 'vue-router' {
@@ -27,6 +43,7 @@ const router = createRouter({
 
 // 前置守卫
 router.beforeEach((to, from, next) => {
+  NProgress.start()
   const token = localStorage.getItem('token')
   console.log('获取动态路由---', router.getRoutes())
   /*  router.hasRoute('User'): 判断路由是否存在 */
@@ -61,6 +78,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
 })
 
 export default router

@@ -22,4 +22,8 @@ onMounted(() => {
   <router-view />
 </template>
 
-<style></style>
+<style>
+#nprogress .bar {
+  background: red !important;
+}
+</style>

@@ -146,7 +146,6 @@ onMounted(() => {
 // token登录
 const handleToken = () => {
   const token = localStorage.getItem('token')
-  debugger
   if (token != null) {
     store.dispatch('authStore/loginByToken', token)
   }
@@ -155,6 +154,7 @@ const handleToken = () => {
 // 登录
 const handleLogin = () => {
   store.dispatch('authStore/login', loginForm)
+  store.dispatch('menuStore/generateSystemMenus', loginForm)
 }
 </script>
 
