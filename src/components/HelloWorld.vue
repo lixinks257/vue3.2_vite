@@ -12,6 +12,7 @@ const increment = () => {
   store.commit('increment')
   console.log('test', test)
 }
+
 /* 类型标注声明props */
 // defineProps<{ msg: string }>()
 

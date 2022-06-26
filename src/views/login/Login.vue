@@ -146,6 +146,7 @@ onMounted(() => {
 // token登录
 const handleToken = () => {
   const token = localStorage.getItem('token')
+  debugger
   if (token != null) {
     store.dispatch('authStore/loginByToken', token)
   }

@@ -4,7 +4,6 @@ import App from './App.vue'
 import router from './router'
 // injection key 传入 useStore 方法可以获取类型化的 store。
 import { store, key } from './store'
-// import { store } from './store'
 // 全局使用动态图标icon
 import * as ElIcons from '@element-plus/icons'
 import * as ElementUI from 'element-plus'
@@ -14,6 +13,16 @@ for (const name in ElIcons) {
   app.component(name, (ElIcons as any)[name])
 }
 app.use(router).use(store, key).mount('#app')
+
+/* 自定义指定 */
+app.directive('btn', {
+  // 当元素挂载dom
+  mounted(el, binding) {
+    if (!store.state.buttonStore.buttonList.includes(binding.value)) {
+      el.parentNode.removeChild(el)
+    }
+  },
+})
 
 // 声明全局变量属性
 declare module '@vue/runtime-core' {

@@ -3,7 +3,7 @@ import { RootState } from '../index'
 import { login, loginByToken } from '@/api/Auth'
 import router from '@/router'
 import { UserType } from '../type'
-
+import { store } from '@/store'
 export interface AuthState {
   token: string
   userInfo: UserType
@@ -48,6 +48,8 @@ export const authStore: Module<AuthState, RootState> = {
         commit('addToken', result.data.token)
         localStorage.setItem('token', result.data.token)
         console.log(result)
+        store.dispatch('menuStore/generateSystemMenus', result.data.permissions)
+        store.dispatch('buttonStore/generateButtons', result.data.permissions)
         if (result.data.status) {
           router.push({ path: '/index' })
         }
@@ -61,6 +63,11 @@ export const authStore: Module<AuthState, RootState> = {
         .then((result) => {
           state.userInfo = result.data
           localStorage.setItem('token', result.data.token)
+          store.dispatch(
+            'menuStore/generateSystemMenus',
+            result.data.permissions,
+          )
+          store.dispatch('buttonStore/generateButtons', result.data.permissions)
           console.log(result)
           if (result.data.status) {
             router.push({ path: '/index' })
