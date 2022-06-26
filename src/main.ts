@@ -7,12 +7,13 @@ import { store, key } from './store'
 // 全局使用动态图标icon
 import * as ElIcons from '@element-plus/icons'
 import * as ElementUI from 'element-plus'
+import i18n from './i18n'
 
 const app = createApp(App)
 for (const name in ElIcons) {
   app.component(name, (ElIcons as any)[name])
 }
-app.use(router).use(store, key).mount('#app')
+app.use(router).use(store, key).use(i18n).mount('#app')
 
 /* 自定义指定 */
 app.directive('btn', {

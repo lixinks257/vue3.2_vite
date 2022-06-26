@@ -3,7 +3,7 @@
   <div>
     <div id="main" ref="main" style="width: 35%; height: 300px;"></div>
     <!--  测试权限按钮 -->
-    <el-button v-btn="'system:goods:goodsInfo:add'">111</el-button>
+    <el-button v-btn="'system:goods:goodsInfo:add'">{{$t('menus.wIndex')}}</el-button>
     <el-button v-btn="'system:goods:goodsInfo:update'">更新按钮</el-button>
     <el-button v-btn="'system:goods:goodsInfo:update'">删除按钮</el-button>
   </div>

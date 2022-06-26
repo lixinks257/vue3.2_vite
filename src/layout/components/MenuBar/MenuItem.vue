@@ -8,7 +8,7 @@
         <el-icon>
           <component :is="menu.meta.icon" />
         </el-icon>
-        <span>{{ menu.meta.title }}</span>
+        <span>{{ $t(menu.meta.title) }}</span>
       </template>
       <!-- 递归菜单组件 -->
       <menu-item :menus="menu.children"></menu-item>
@@ -17,7 +17,7 @@
       <el-icon>
         <component :is="menu.meta.icon" />
       </el-icon>
-      <span>{{ menu.meta.title }}</span>
+      <span>{{ $t(menu.meta.title) }}</span>
     </el-menu-item>
   </template>
 </template>
