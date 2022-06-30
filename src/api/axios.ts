@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: '/api',
+ /*  配置环境变量 */
+  baseURL: import.meta.env.VITE_URL,
 })
 
 // request拦截器

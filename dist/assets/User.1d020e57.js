@@ -1,0 +1,1 @@
+import{d as s,e,X as a,w as t,k as r,m as o,M as n}from"./index.b6704809.js";/* empty css                       *//* empty css                 */const l=r("User"),p=s({setup(s){const{proxy:r}=n(),p=()=>{null==r||r.$Alert("XXXXX")};return(s,r)=>{const n=o;return e(),a(n,{onClick:p},{default:t((()=>[l])),_:1})}}});export{p as default};
