@@ -23,6 +23,7 @@ export default defineConfig({
     },
   },
   resolve: {
+    // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.css'],
     alias: {
       /* 别名配置 */
       '@': path.resolve(__dirname, 'src'),
@@ -54,11 +55,15 @@ terser 快 20-40 倍，压缩率只差 1%-2%。  */
     /* 按需引入element-plus */
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      dts: 'src/auto-imports.d.ts',
+      imports: ['vue']
     }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    vue(),
+    vue({
+      // refTransform: true,
+    }),
     // giz压缩
     viteCompression(),
   ],

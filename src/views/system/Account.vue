@@ -111,15 +111,15 @@ import {
 import { getAllRoles } from '@/api/system/role'
 import 'element-plus/es/components/message-box/style/css'
 import 'element-plus/es/components/notification/style/css'
-import {
-  ComponentInternalInstance,
-  getCurrentInstance,
-  onMounted,
-  reactive,
-  ref,
-  Ref,
-} from 'vue'
-const { proxy } = getCurrentInstance() as ComponentInternalInstance
+// import {
+//   ComponentInternalInstance,
+//   getCurrentInstance,
+//   onMounted,
+//   reactive,
+//   ref,
+//   Ref,
+// } from 'vue'
+const { proxy } = getCurrentInstance()
 
 const state = reactive({
   users: [],
@@ -157,7 +157,7 @@ onMounted(() => {
 // 获取系统用户
 const getUsers = () => {
   getAllSysUsers().then((result) => {
-    console.log(result)
+    console.log('users',result)
     state.users = result.data
   })
 }

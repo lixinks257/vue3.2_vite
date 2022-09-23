@@ -92,13 +92,13 @@ import 'element-plus/es/components/message-box/style/css'
 import 'element-plus/es/components/notification/style/css'
 import permissionTree from '@/router/permissionTree'
 import type { ElTree } from 'element-plus'
-import {
-  ComponentInternalInstance,
-  getCurrentInstance,
-  onMounted,
-  reactive,
-  ref,
-} from 'vue'
+// import {
+//   ComponentInternalInstance,
+//   getCurrentInstance,
+//   onMounted,
+//   reactive,
+//   ref,
+// } from 'vue'
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 
 const state = reactive({
