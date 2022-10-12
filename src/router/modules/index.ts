@@ -6,6 +6,7 @@ import systemRouter from './system'
 import userRouter from  './user'
 import {RouteRecordRaw} from 'vue-router'
 
+
 export const asyncRoutes:RouteRecordRaw[] = [
     homeRouter,
     userRouter,

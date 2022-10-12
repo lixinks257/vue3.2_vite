@@ -16,13 +16,13 @@ const route = useRoute()
 const breadcrumb: Ref<RouteLocationMatched[]> = ref([])
 const getBreadCrumb = () => {
   let matched = route.matched.filter(
-    (item) => item.meta && item.meta.title && item.children.length !== 1,
+    item => item.meta && item.meta.title && item.children.length !== 1
   )
 
   const frist = matched[0]
   if (frist.path !== '/index') {
     matched = [{ path: '/index', meta: { title: '首页' } } as any].concat(
-      matched,
+      matched
     )
   }
   breadcrumb.value = matched
@@ -37,7 +37,7 @@ watch(
   () => route.path,
   () => {
     getBreadCrumb()
-  },
+  }
 )
 </script>
 <style lang="scss" scoped></style>

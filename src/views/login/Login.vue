@@ -43,7 +43,7 @@
               border: 1px solid rgba(255, 255, 255, 0.1);
             "
           ></el-input>
-          <div style="margin-left: 10px; display: inline-block; height: 40px;">
+          <div style="margin-left: 10px; display: inline-block; height: 40px">
             <img
               :src="codeUrl"
               @click="getValidaCode"
@@ -56,8 +56,8 @@
             />
           </div>
         </el-form-item>
-        <el-form-item style="border: none; background: none;">
-          <el-button type="primary" style="width: 100%;" @click="handleLogin">
+        <el-form-item style="border: none; background: none">
+          <el-button type="primary" style="width: 100%" @click="handleLogin">
             登录
           </el-button>
         </el-form-item>
@@ -68,12 +68,12 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import { getCode, login } from '@/api/Auth'
-import { useRouter } from 'vue-router'
+import { getCode } from '@/api/Auth'
+// import { useRouter } from 'vue-router'
 import { useStore } from '@/store'
 
 const store = useStore()
-const router = useRouter()
+// const router = useRouter()
 // 验证码
 const codeUrl = ref<string>()
 // form表单数据
@@ -132,7 +132,7 @@ const loginRules = reactive({
 
 // 获取验证码
 const getValidaCode = () => {
-  getCode().then((res) => {
+  getCode().then(res => {
     codeUrl.value = res.data.image
     /*  获取uuid */
     loginForm.uuid = res.data.uuid

@@ -18,12 +18,12 @@ export default defineConfig({
         target: 'http://106.52.235.252:8101/',
         changeOrigin: true, // 允许跨域
         // 将作为识别用途的/api字符串从请求路径中去掉
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: path => path.replace(/^\/api/, ''),
       },
     },
   },
   resolve: {
-    // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.css'],
+    // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.css'],
     alias: {
       /* 别名配置 */
       '@': path.resolve(__dirname, 'src'),
@@ -55,8 +55,9 @@ terser 快 20-40 倍，压缩率只差 1%-2%。  */
     /* 按需引入element-plus */
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      //  API 自动导入,可以自定义文件生成的位置，默认是根目录下，使用ts的建议放src目录下
       dts: 'src/auto-imports.d.ts',
-      imports: ['vue']
+      imports: ['vue'],
     }),
     Components({
       resolvers: [ElementPlusResolver()],

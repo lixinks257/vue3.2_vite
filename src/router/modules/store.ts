@@ -1,11 +1,11 @@
-import Layout from '@/layout/index.vue'
+// import Layout from '@/layout/index.vue'
 import {RouteRecordRaw} from 'vue-router'
 import i18n from '@/i18n'
 const storeRouter:RouteRecordRaw = {
     path: '/stores',
     redirect: '/stores/Location',
     name: 'storesLocation',
-    component:Layout,
+    component:() => import('@/layout/index.vue'),
     meta: {
         title: 'menus.wStoreManger',
         icon:'LocationInformation',

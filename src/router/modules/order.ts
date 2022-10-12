@@ -6,8 +6,8 @@ import {
 const orderRouter:RouteRecordRaw =  {
     path: '/order',
     name: 'Order',
-    component:Layout,
-   
+    // component:Layout,
+    component:() => import('@/layout/index.vue'),
     meta: {
       title: 'menus.wOrderManger',
       icon: 'Notebook',

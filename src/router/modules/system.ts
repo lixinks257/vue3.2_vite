@@ -5,7 +5,8 @@ import i18n from '@/i18n'
 const systemRouter:RouteRecordRaw =  {
     path:'/system',
     name:'system',
-    component:Layout,
+    // component:Layout,
+    component:() => import('@/layout/index.vue'),
     redirect:'/system/account' || '/system/group' || '/system/task' || '/system/Setting',
     meta:{
       title:'menus.wSystemAdmin',
@@ -23,8 +24,6 @@ const systemRouter:RouteRecordRaw =  {
           icon:'User',
           permission: "system:admin:sysUser"
         },
-        
-
       },
       {
         path:'group',

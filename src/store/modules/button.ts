@@ -21,7 +21,7 @@ export const buttonStore: Module<ButtonState, RootState> = {
 
   actions: {
     generateButtons({ commit, state }, buttons: string[]) {
-      let bList: string[] = []
+      const bList: string[] = []
       buttons.forEach((button) => {
         if (button.match(/:/g)?.length === 3) {
           bList.push(button)

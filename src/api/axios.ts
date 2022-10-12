@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
- /*  配置环境变量 */
+  /*  配置环境变量 */
   baseURL: import.meta.env.VITE_URL,
 })
 
 // request拦截器
 axiosInstance.interceptors.request.use(
-  (requestInfo) => {
+  requestInfo => {
     // 设置请求头
     if (requestInfo.headers) {
       requestInfo.headers['token'] = localStorage.getItem('token') || '0'
@@ -15,13 +15,13 @@ axiosInstance.interceptors.request.use(
       return requestInfo
     }
   },
-  (error) => {
+  error => {
     return Promise.reject(error)
-  },
+  }
 )
 
 // response 拦截器
-axiosInstance.interceptors.response.use((response) => {
+axiosInstance.interceptors.response.use(response => {
   const res = response.data
   if (res.code === 200) {
     return res

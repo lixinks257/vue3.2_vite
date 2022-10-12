@@ -7,7 +7,8 @@ const homeRouter:RouteRecordRaw= {
   path: '/',
   redirect: '/index',
   name: 'Index',
-  component: Layout,
+  // component: Layout,
+  component:() => import('@/layout/index.vue'),
   meta: {
     title: 'menus.wIndex',
     icon: 'house',

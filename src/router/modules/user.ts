@@ -6,7 +6,8 @@ const userRouter:RouteRecordRaw = {
     path: '/user',
     redirect: '/user/manger',
     name: 'User',
-    component:Layout,
+    component:() => import('@/layout/index.vue'),
+    // component:Layout,
     meta: {
       title: 'menus.wUserManger',
       icon:'UserFilled',

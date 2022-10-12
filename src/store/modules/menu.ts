@@ -7,6 +7,7 @@ import router from '@/router'
 export interface MenuState {
   menuList: RouteRecordRaw[]
 }
+
 /* 判断是否有权限 */
 function hasPermission(perms: string[], needPermission: string) {
   for (let i = 0; i < perms.length; i++) {
@@ -16,9 +17,10 @@ function hasPermission(perms: string[], needPermission: string) {
   }
   return false
 }
+
 function filterRouter(routes: RouteRecordRaw[], perms: string[]) {
   const res: RouteRecordRaw[] = []
-  routes.forEach((route) => {
+  routes.forEach(route => {
     if (route.children) {
       route.children = filterRouter(route.children, perms)
       if (route.children.length > 0) {
@@ -44,8 +46,9 @@ export const menuStore: Module<MenuState, RootState> = {
   }),
 
   getters: {
-    getMenus: (state) => state.menuList,
+    getMenus: state => state.menuList,
   },
+
   mutations: {
     setMenus(state, systemMenu) {
       state.menuList = systemMenu
@@ -53,11 +56,11 @@ export const menuStore: Module<MenuState, RootState> = {
   },
 
   actions: {
-    generateSystemMenus({ commit, state }, perm: string[]) {
-      let routers = filterRouter(asyncRoutes, perm)
+    generateSystemMenus({ commit }, perm: string[]) {
+      const routers = filterRouter(asyncRoutes, perm)
 
       // 添加到动态路由
-      routers.forEach((route) => {
+      routers.forEach(route => {
         // 二级menu跳成一级menu
         if (route.redirect == null && route.children?.length == 1) {
           route.redirect = route.path + '/' + route.children[0].path

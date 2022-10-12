@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     $Notify: any
   }
 }
+
 // 声明全局变量
 app.config.globalProperties.$Confirm = ElementUI.ElMessageBox.confirm
 app.config.globalProperties.$Alert = ElementUI.ElMessageBox.alert
