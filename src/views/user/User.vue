@@ -1,6 +1,5 @@
-<!--  -->
 <template>
-  <el-button @click="add">User</el-button>
+	<el-button @click="add">User</el-button>
 </template>
 
 <script setup lang="ts">
@@ -9,8 +8,8 @@ import 'element-plus/es/components/message-box/style/css'
 import { ComponentInternalInstance, getCurrentInstance } from 'vue' // 添加断言
 const { proxy } = getCurrentInstance() as ComponentInternalInstance
 const add = () => {
-  // 使用全局变量
-  proxy?.$Alert('XXXXX')
+	// 使用全局变量
+	proxy?.$Alert('XXXXX')
 }
 </script>
 <style lang="scss" scoped></style>

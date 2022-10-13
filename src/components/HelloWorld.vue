@@ -9,18 +9,18 @@ const store = useStore()
 //   return store.state.count
 // })
 const increment = () => {
-  // 使用
-  store.commit('increment')
-  // console.log('test', test)
+	// 使用
+	store.commit('increment')
+	// console.log('test', test)
 }
 
 /* 类型标注声明props */
 // defineProps<{ msg: string }>()
 
 defineProps({
-  msg: {
-    type: String,
-  },
+	msg: {
+		type: String,
+	},
 })
 
 const count = ref(0)
@@ -28,28 +28,28 @@ const user = ref('111')
 </script>
 
 <template>
-  <!-- <h1>{{ props.msg }}</h1> -->
-  <!-- 可以省略props -->
-  <h1>{{ msg }}++++++</h1>
-  <slot :user="user"></slot>
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <button type="button" @click="increment">test is: {{ test }}</button>
+	<!-- <h1>{{ props.msg }}</h1> -->
+	<!-- 可以省略props -->
+	<h1>{{ msg }}++++++</h1>
+	<slot :user="user"></slot>
+	<button type="button" @click="count++">count is: {{ count }}</button>
+	<button type="button" @click="increment">test is: {{ test }}</button>
 </template>
 
 <style scoped>
 a {
-  color: #42b983;
+	color: #42b983;
 }
 
 label {
-  margin: 0 0.5em;
-  font-weight: bold;
+	margin: 0 0.5em;
+	font-weight: bold;
 }
 
 code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
+	background-color: #eee;
+	padding: 2px 4px;
+	border-radius: 4px;
+	color: #304455;
 }
 </style>

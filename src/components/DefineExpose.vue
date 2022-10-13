@@ -3,35 +3,35 @@ import { ref } from 'vue'
 
 const count = ref(0)
 const handle = () => {
-  count.value++
-  console.log('count', count.value)
+	count.value++
+	console.log('count', count.value)
 }
 
 /* 对外暴露属性(defineExpose) */
 defineExpose({
-  count,
-  handle,
+	count,
+	handle,
 })
 </script>
 
 <template>
-  <button type="button" @click="handle">count is: {{ count }}</button>
+	<button type="button" @click="handle">count is: {{ count }}</button>
 </template>
 
 <style scoped>
 a {
-  color: #42b983;
+	color: #42b983;
 }
 
 label {
-  margin: 0 0.5em;
-  font-weight: bold;
+	margin: 0 0.5em;
+	font-weight: bold;
 }
 
 code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
+	background-color: #eee;
+	padding: 2px 4px;
+	border-radius: 4px;
+	color: #304455;
 }
 </style>

@@ -1,24 +1,18 @@
 <template>
-  <el-menu
-    default-active="2"
-    active-text-color="#409EFF"
-    text-color="#fff"
-    class="el-menu"
-    :collapse="collapsed"
-  >
-    <menu-item :menus="menus"></menu-item>
-  </el-menu>
+	<el-menu default-active="2" active-text-color="#409EFF" text-color="#fff" class="el-menu" :collapse="collapsed">
+		<menu-item :menus="menus"></menu-item>
+	</el-menu>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import MenuItem from './MenuItem.vue'
-import {useStore} from '@/store'
+import { useStore } from '@/store'
 const store = useStore()
 defineProps({
-  collapsed: {
-    type: Boolean,
-  },
+	collapsed: {
+		type: Boolean,
+	},
 })
 const menus = store.getters['menuStore/getMenus']
 // const menus = reactive([
@@ -199,7 +193,7 @@ const menus = store.getters['menuStore/getMenus']
 
 <style lang="scss">
 .el-menu {
-  background-color: $menuBg;
-  border: none;
+	background-color: $menuBg;
+	border: none;
 }
 </style>
